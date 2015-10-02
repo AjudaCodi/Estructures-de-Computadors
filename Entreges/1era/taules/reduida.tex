@@ -1,0 +1,35 @@
+\documentclass[border=2]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+
+\usepackage{amsmath, color}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+
+\begin{document}
+
+\begin{tabular}{|l|c	| c	| c	| c		| c		| c		| c		| c		| c		| c		| c	| c	| c			| c		| c |} \hline
+Cilce		& 0	& 1	& 2	& 3		& 4		& 5		& 6		& 7		& 8		& 9		& 10	& 11	& 12			& 13		& 14		\\\hline\hline
+
+Read PC		& 100	& 101	& 102	& 103		& 104		& 105		& 106		& 107		& 108		& 109		& 110	& 111	& 112			& 113		& 125		\\
+Write IR	& Load	& Load	& Load	& MUL		& SQR		& MUL		& MUL		& Noop		& Noop		& SUB		& Ble	& Noop	& SQRT			& Noop		& 		\\\hline	
+
+Write R\_A	&	&	&	&		& R1		& R2		& R1		& R3		&		&		& R5	& R5	&			& R3		&		\\
+Write R\_B	&	& R8	& R8	& R8		& \#4		&		& \#2		& R4		&		&		& R1	& R1	&			&		&		\\\hline
+
+Write AR	&	&	& R8+a	& R8+b		& R8+c		&		&		&		& R3$\cdot$R4	&		&	&	&			&		&		\\
+Write DR	&	&	&	&		&		& R1$\cdot 4$	& R2$^2$	& R1$\cdot 2$	&		&		&	& R5-R1	& R5$<$R1		&		&		\\\hline
+
+Write CR	&	&	&	& R1		& R2		& R3		& R4		& R5		& R6		& R1		&	&	& R3			&		&		\\
+Write Mem	&	&	&	&		&		&		&		&		&		&		&	&	&			&		&		\\
+Write PC	& 101	& 102	& 103	& 104		& 105		& 106		& 107		& 108		& 109		& 110		& 111	& 112	& 113			& 125		& 126		\\\hline\hline			
+
+R1		&	&	&	& \red{$a$}	& $a$		& $a$		& $a$		& $a$		& $a$		& \red{$4ac$}	& $4ac$ & $4ac$	& $4ac$			& $4ac$		& $4ac$		\\
+R2		&	&	&	&		& \red{$b$}	& $b$		& $b$		& $b$		& $b$		& $b$		& $b$	& $b$	& $b$			& $b$		& $b$		\\
+R3		&	&	&	&		&		& \red{$c$}	& $c$		& $c$		& $c$		& $c$		& $c$	& $c$	& \red{$b^2 - 4ac$}	& $b^2 - 4ac$	& $b^2 - 4ac$	\\
+R4		&	&	&	&		&		&		& \red{$4a$}	& $4a$		& $4a$		& $4a$		& $4a$	& $4a$	& $4a$			& $4a$		& $4a$		\\
+R5		&	&	&	&		&		&		&		& \red{$b^2$}	& $b^2$		& $b^2$		& $b^2$	& $b^2$	& $b^2$			& $b^2$		& $b^2$		\\
+R6		&	&	&	&		&		&		&		&		& \red{$2a$}	& $2a$		& $2a$	& $2a$	& $2a$			& $2a$		& $2a$		\\
+R7		&	&	&	&		&		&		&		&		&		&		&	&	&			&		&		\\\hline
+\end{tabular}
+\end{document}

@@ -3,3 +3,9 @@
 
 # tota la basura
 b
+
+# per possibles errors meus, LaTeX
+*.aux
+*.dvi
+*.log
+*.pdf
