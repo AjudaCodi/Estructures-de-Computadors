@@ -1,0 +1,161 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\title{Estructures Computadors}
+\author{Sistach Reinoso, Arnau}
+
+% nomes crec que serveix per la ela geminada (on sense el corrector dubto mai fer-ho anar 183 ·)
+\usepackage[catalan]{babel}
+
+% perque quedi mes clar
+\usepackage{color}
+
+% fer el rcases
+\usepackage{mathtools}
+
+% faig anar equation*
+\usepackage{amsmath}
+
+
+% declarant funcions
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Id}{Id}
+
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+
+
+
+% like kindle
+
+\usepackage{microtype}     % microtypography, reduces hyphenation
+
+\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}  % page geometry
+
+\usepackage{fancyhdr}   % headers and footers
+\pagestyle{fancy}
+\fancyhead{}            % clear page header
+\fancyfoot{}            % clear page footer
+
+\setlength{\abovecaptionskip}{2pt} % space above captions 
+\setlength{\belowcaptionskip}{0pt} % space below captions
+\setlength{\textfloatsep}{2pt}     % space between last top float or first bottom float and the text
+\setlength{\floatsep}{2pt}         % space left between floats
+\setlength{\intextsep}{2pt}        % space left on top and bottom of an in-text float
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Elements bàsics}
+\begin{itemize}
+\item CPU - Central Processing Unit
+	\begin{itemize}
+	\item UC - Unity Control
+		\subitem IR - Instruction Registrer
+	\item UP - Uniti Proces
+	\end{itemize}
+\end{itemize}
+Vida d'una instrucció
+\begin{itemize}
+\item IF - Instruction Fetch
+\item OF - Operand Fetch
+\item EX - Execute
+\item WB - Write Back
+\end{itemize}
+Més definicioins
+\begin{itemize}
+\item CPI - Cicles de rellotge Per Instrucció
+\item MIPS - Millons d'Instruccions Per Segon
+	\begin{itemize}
+	\item $f_c[MHz]$ - freqüència de relotge en MHz
+	\item MIPS = $\frac{f_c[MHz]}{\text{CPI}}$
+	\end{itemize}
+\end{itemize}
+Instruccions - Exemple simple
+\begin{itemize}
+\item Registre
+	\begin{itemize}
+	\item Aritmètiques
+	\item Lògic
+	\item Moure
+	\item Desplaçar
+	\end{itemize}
+\item Memòria
+	\begin{itemize}
+	\item Load
+	\item Store
+	\end{itemize}
+\item Control
+	\begin{itemize}
+	\item Jump
+	\item Branch ``cada una al seu canto''
+	\end{itemize}
+\item Misce\lgem ània
+	\begin{itemize}
+	\item Noop
+	\item Altres
+	\end{itemize}
+\end{itemize}
+Pipeline - RISC
+\begin{itemize}
+\item CPI $\to$ 1
+	\begin{itemize}
+	\item $S$ = $\frac{T_\text{no pipeline}}{T_\text{pipeline}}$ Guany
+	\item $m$ és el nombre d'instruccions
+	\item $E = \frac{S}{m}$ Eficiència
+	\end{itemize}
+\item Necessitat de 2 memòries independents
+	\begin{itemize}
+	\item codi
+	\item dades
+	\end{itemize}
+\item Problemes
+	\begin{itemize}
+	\item Data, Noop + reordenar = static
+	\item Data Forwarding - Dinàmic
+		\begin{itemize}
+		\item Solució devant de dependències de dades
+		\item 2 nous camins
+		\end{itemize}
+	\item Branch
+		\begin{itemize}
+		\item 
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\newpage
+\section{Futur pròxim}
+\begin{itemize}
+\item pentium Pro
+\item power pc 620
+\item ultrasparc I
+\item alpha 21164a
+\item MIPS R10000
+\item HP-PA 8000 ``més m'agrada''
+\end{itemize}
+\subsection{Trouvé}
+Similar a la catché, però aquesta tindrà el seu propi codi. Per a funcionar, necessitarà d'esdeveniments.
+
+Capacitat de crear codi orientat a esdeveniments per evitar un màxim condicions propies de codi. Que aquest pugui fer feina sense preocupar-se gaire.
+\subsubsection{Data forwarding}
+Ve a ser molt similar a la catché, però ara a nivell del CPU.
+
+Només vindrie a ser un sistema de programar la CPU, per a no necessitar d'una solució dinàmica. El mateix, però el mateix codi se faria responsable.
+
+Si al final sembla que tot se simplifica menys la UC jajaja.
+
+\subsection{Compilador}
+Pel problema de trobar una solució de l'equació quadrada. Doncs eso.
+
+Que pugui veure quina es la forma amb menys instruccions possibles :)
+
+\end{document}
+
+Imprimir la pagina 10 2-01, estaria prou be ;)

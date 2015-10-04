@@ -18,8 +18,8 @@ Write IR	& Load	& Load	& Load	& MUL		& SQR		& MUL		& MUL		& Noop		& Noop		& SUB	
 Write R\_A	&	&	&	&		& R1		& R2		& R1		& R3		&		&		& R5	& R5	&			& R3		&			&				& R1			&			&				& R3				&				&						& R1	&	&	\\
 Write R\_B	&	& R8	& R8	& R8		& \#4		&		& \#2		& R4		&		&		& R1	& R1	&			&		&			&				& R2			&			&				& R6				&				&						& R8	&	&	\\\hline
 
-Write AR	&	&	& R8+a	& R8+b		& R8+c		&		&		&		& R3$\cdot$R4	&		&	&	&			&		&			&				&			&			&				&				&				&						&	& R8+x	&	\\
-Write DR	&	&	&	&		&		& R1$\cdot 4$	& R2$^2$	& R1$\cdot 2$	&		&		&	& R5-R1	& R5$<$R1		&		& $\sqrt{\text{R3}}$	&				&			& R1-R2			&				&				& R3/R6				&						&	& R1	&	\\\hline
+Write AR	&	&	& R8+a	& R8+b		& R8+c		&		&		&		&		&		&	&	&			&		&			&				&			&			&				&				&				&						&	& R8+x	&	\\
+Write DR	&	&	&	&		&		& R1$\cdot 4$	& R2$^2$	& R1$\cdot 2$	& R3$\cdot$R4	&		&	& R5-R1	& R5$<$R1		&		& $\sqrt{\text{R3}}$	&				&			& R1-R2			&				&				& R3/R6				&						&	& R1	&	\\\hline
 
 Write CR	&	&	&	& R1		& R2		& R3		& R4		& R5		& R6		& R1		&	&	& R3			&		&			& R1				&			&			& R3				&				&				& R1						&	&	&	\\
 Write Mem	&	&	&	&		&		&		&		&		&		&		&	&	&			&		&			&				&			&			&				&				&				&						&	&	& DR	\\
