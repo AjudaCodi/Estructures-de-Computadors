@@ -1,0 +1,38 @@
+\documentclass[border=2]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+
+\usepackage{amsmath, color}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+
+\begin{document}
+
+\begin{tabular}
+{|l		| c	| c	| c	| c		| c		| c		| c		| c		| c		| c		| c			| c				| c				| c				| c				| c				| c						| c						| c					| c					|}\hline
+Cilce		& 0	& 1	& 2	& 3		& 4		& 5		& 6		& 7		& 8		& 9		& 10			& 11				& 12				& 13				& 14				& 15				\\\hline\hline
+
+Read PC		& 100	& 101	& 102	& 103		& 104		& 105		& 106		& 107		& 108		& 109		& 110			& 111				& 112				& 113				& 114				& 115				\\
+Write IR	& Load	& Load	& Load	& MUL		& SQR		& MUL 		& Ble		& SUB		& SQRT		& SUB		& MUL			& DIV				& Store				& 				&				&				\\\hline
+
+Write R\_A	&	&	&	&		& R1		& R2		& R3		& R5 		& R5		& R3		& R4			& R1				& R3				& R1				&				&				\\
+Write R\_B	&	& R8	& R8	& R8		& \#4		&		& R4		& R6		& R6		&		& R2			& \#2				& R2				& R8				&				&				\\\hline
+
+Write AR	&	&	& R8+a	& R8+b		& R8+c		&		&		&		&		&		&			&				&				&				& R8+x				&				\\
+Write DR	&	&	&	&		&		& R1$\cdot$ 4	& R2$^2$	& R3$\cdot$R4	& R5$<$R6	& R5-R6		& $\sqrt{\text{R3}}$	& R4 - R2			& R1$\cdot$2			& R3/R2				& R1				&				\\\hline
+
+Write CR	&	&	&	& R1		& R2		& R3		& R4		& R5		& R6		&		& R3			& R4				& R3				& R2				& R1				&				\\
+Write Mem	&	&	&	&		&		&		&		&		&		&		&			&				&								&				&			& DR	\\
+Write PC	& 101	& 102	& 103	& 104		& 105		& 106		& 107		& 108		& 109		& 110		& 111			& 112				& 113				& 114				& 115				& 116				\\\hline\hline
+
+R1		&	&	&	& $\red{a}$	& $a$		& $a$		& $a$		& $a$		& $a$		& $a$		& $a$			& $a$				& $a$				& $a$				& $\red{\frac{-b + \sqrt{b^2 - 4ac}}{2a}}$	& $\frac{-b + \sqrt{b^2 - 4ac}}{2a}$	\\
+R2		&	&	&	&		& $\red{b}$	& $b$		& $b$		& $b$		& $b$		& $b$		& $b$			& $b$				& $b$				& $\red{2a}$			& $2a$						& $2a$	\\
+R3		&	&	&	&		&		& $\red{c}$	& $c$		& $c$		& $c$		& $c$		& $\red{b^2 - 4ac}$	& $b^2 - 4ac$			& $\red{-b + \sqrt{b^2 - 4ac}}$	& $-b + \sqrt{b^2 - 4ac}$	& $-b + \sqrt{b^2 - 4ac}$			& $-b + \sqrt{b^2 - 4ac}$		\\
+R4		&	&	&	&		&		&		& $\red{4a}$	& $4a$		& $4a$		& $4a$		& $4a$			& $\red{\sqrt{b^2 - 4ac}}$	& $\sqrt{b^2 - 4ac}$		& $\sqrt{b^2 - 4ac}$		& $\sqrt{b^2 - 4ac}$				& $\sqrt{b^2 - 4ac}$					\\
+R5		&	&	&	&		&		&		&		& $\red{b^2}$	& $b^2$		& $b^2$		& $b^2$			& $b^2$				& $b^2$				& $b^2$				& $b^2$						& $b^2$					\\
+R6		&	&	&	&		&		&		&		&		& $\red{4ac}$	& $4ac$		& $4ac$			& $4ac$				& $4ac$				& $4ac$				& $4ac$						& $4ac$					\\
+R7		&	&	&	&		&		&		&		&		&		&		&			&				&				&				&						&					\\\hline
+
+\end{tabular}
+
+\end{document}

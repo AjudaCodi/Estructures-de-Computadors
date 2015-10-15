@@ -1,0 +1,31 @@
+\documentclass[border=2]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+
+\usepackage{amsmath, color}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+
+\begin{document}
+
+\begin{tabular}
+{|c|l|l|}\hline
+Adreça	& Instrucció	&	Què fa	\\\hline\hline
+100	& Load R1 R8 Offcet-a	& Carrega el registre R1\\\hline
+101	& Load R2 R8 Offcet-b	& Carrega el registre R2\\\hline
+102	& Load R3 R8 Offcet-c	& Carrega el registre R3\\\hline
+103	& MUL R4 R1 \#4		& $4a$\\\hline
+104	& SQR R5 R2		& $b^2$\\\hline
+105	& MUL R6 R3 R4		& $4ac$\\\hline
+106	& Ble R5 R6 \#113	& $b^2 \overset{?}{<} 4ac$, si es el cas, fa el salt\\\hline
+107	& SUB R3 R5 R6		& $b^2 - 4ac$\\\hline
+108	& SQRT R4 R3		& $\sqrt{b^2 - 4ac}$\\\hline
+109	& SUB R3 R4 R2		& $-b + \sqrt{b^2 - 4ac}$\\\hline
+110	& MUL R2 R1 \#2		& $2a$\\\hline
+111	& DIV R1 R3 R2		& $\frac{-b + \sqrt{b^2 - 4ac}}{2a}$\\\hline
+112	& Store R8 Offcet-x	& Guarda el resultat\\\hline
+\end{tabular}
+
+\end{document}
+
+116 el de les 2 solucions...
