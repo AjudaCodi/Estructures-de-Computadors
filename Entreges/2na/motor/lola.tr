@@ -1,0 +1,247 @@
+.EQ
+delim $$
+.EN
+.ds RED "\X'ps: exec 1 0 0 setrgbcolor'
+.ds GREEN "\X'ps: exec 0 1 0 setrgbcolor'
+.ds BLUE "\X'ps: exec 0 0 1 setrgbcolor'
+.ds YELLOW "\X'ps: exec 1 1 0 setrgbcolor'
+.ds MAGENTA "\X'ps: exec 1 0 1 setrgbcolor'
+.ds CYAN "\X'ps: exec 0 1 1 setrgbcolor'
+.ds BLACK "\X'ps: exec 0 0 0 setrgbcolor'
+.ds WHITE "\X'ps: exec 1 1 1 setrgbcolor'
+
+
+.TL
+Mem\*[`]oria cach\*[']e
+.AU
+Segona entrega, canviant a troff amb tbl i eqn
+.AI
+Sistach Reinoso, Arnau
+
+.NH
+Enunciat
+
+.LP
+.TS
+delim ($$);
+l	l	n
+.
+General	Mida de les paraules	1 Byte
+
+Cach\*'e	Mida	4KB = $2 sup 12$ B
+\^	Associativa	4 camins
+\^	Paraules	64 per bloc
+\^	Temps acc\*'es	$T sub c$
+
+Mem\*`oria principal	Temps acc\*'es	$10 cdot T sub c$
+\^	Mida	1MB = $2 sup 20$B
+.TE
+Volem executar 4352 posicions 10 vegades.
+.br
+Volem saber:
+.IP
+El n\*'umero de bits pel $TAG$, $SET$ i paraula.
+.IP
+El benefici amb cach\*'e usant el MRU.
+
+.NH
+Primer apartat, descobrir els bits.
+.LP
+S'ha dit que els blocs s\*'on de 64.
+.EQ
+paraula = log sub 2 64 = log sub 2 2 sup 6 = 6
+.EN
+S'ha dit associativa a 4 camins. $-> K = 4$
+.br
+Tot se refereix al tamany total de la catche.
+Bloc, el nombre de linies que hi ha al bloc.
+.EQ
+C = tot over bloc = 2 sup 12 over 2 sup 6 = 2 sup 6 = 64
+.EN
+.EQ
+C = K cdot S -> S = C over K = 2 sup 6 over 2 sup 2 = 2 sup 4 = 16
+.EN
+.EQ
+SET = log sub 2 C = log sub 2 2 sup 4 = 4
+.EN
+.EQ
+TAG = log sub 2 (Memoria principal) - SET - paraula = log sub 2 2 sup 20 - 4 - 6 = 20 - 10 = 10
+.EN
+
+Resoluci\*'o
+
+.TS
+center allbox;
+ce ce ce.
+TAG (10)	SET (4)	Word (6)
+.TE
+
+
+.NH
+Segon apartat, el benefici
+.LP
+.EQ
+64 cdot 68 = 4352 = 2 sup 8 cdot 17 > 2 sup 12
+.EN
+On $2 sup 12$ \*'es la mida de la catch\*'e. Implica que necessitarem m\*'es mem\*`oria que te la catch\*'e.
+.br
+Aqu\*[']\i fent una taula:
+.TS
+center;
+l s ||	c	s |	c	s |	c	s |	c	s |	c	s
+c s |	n 	n ||	n 	n ||	n	n ||	n	n ||	n	n
+n n ||	n	n |	n	n |	n	n |	n	n |	n	n
+.
+Cicles	Cicle 1	Cicle 2	Cicle 3	Cicle 4	Cicle 5
+=
+Estat l\*[`]\*[']ogic	1	2	3	4	5	6	7	8	9	10
+_
+Conjunt 0	Bloc 0	\*[RED]0\*[BLACK]	0	0	0	0	0	0	\*[RED]16\*[BLACK]	16	16	
+\^	Bloc 1	\*[RED]16\*[BLACK]	16	16	16	16	\*[RED]32\*[BLACK]	32	32	32	32	
+\^	Bloc 2	\*[RED]32\*[BLACK]	32	32	\*[RED]48\*[BLACK]	48	48	48	48	48	48	
+\^	Bloc 3	\*[RED]48\*[BLACK]	\*[RED]64\*[BLACK]	64	64	64	64	64	64	64	\*[RED]0\*[BLACK]	
+_
+Conjunt 1	Bloc 4	\*[RED]1\*[BLACK]	1	1	1	1	1	1	\*[RED]17\*[BLACK]	17	17	
+\^	Bloc 5	\*[RED]17\*[BLACK]	17	17	17	17	\*[RED]33\*[BLACK]	33	33	33	33	
+\^	Bloc 6	\*[RED]33\*[BLACK]	33	33	\*[RED]49\*[BLACK]	49	49	49	49	49	49	
+\^	Bloc 7	\*[RED]49\*[BLACK]	\*[RED]65\*[BLACK]	65	65	65	65	65	65	65	\*[RED]1\*[BLACK]	
+_
+Conjunt 2	Bloc 8	\*[RED]2\*[BLACK]	2	2	2	2	2	2	\*[RED]18\*[BLACK]	18	18	
+\^	Bloc 9	\*[RED]18\*[BLACK]	18	18	18	18	\*[RED]34\*[BLACK]	34	34	34	34	
+\^	Bloc 10	\*[RED]34\*[BLACK]	34	34	\*[RED]50\*[BLACK]	50	50	50	50	50	50	
+\^	Bloc 11	\*[RED]50\*[BLACK]	\*[RED]66\*[BLACK]	66	66	66	66	66	66	66	\*[RED]2\*[BLACK]	
+_
+Conjunt 3	Bloc 12	\*[RED]3\*[BLACK]	3	3	3	3	3	3	\*[RED]19\*[BLACK]	19	19	
+\^	Bloc 13	\*[RED]19\*[BLACK]	19	19	19	19	\*[RED]35\*[BLACK]	35	35	35	35	
+\^	Bloc 14	\*[RED]35\*[BLACK]	35	35	\*[RED]51\*[BLACK]	51	51	51	51	51	51	
+\^	Bloc 15	\*[RED]51\*[BLACK]	\*[RED]67\*[BLACK]	67	67	67	67	67	67	67	\*[RED]3\*[BLACK]	
+_
+Conjunt 4	Bloc 16	\*[RED]4\*[BLACK]	4	4	4	4	4	4	4	4	4	
+\^	Bloc 17	\*[RED]20\*[BLACK]	20	20	20	20	20	20	20	20	20	
+\^	Bloc 18	\*[RED]36\*[BLACK]	36	36	36	36	36	36	36	36	36	
+\^	Bloc 19	\*[RED]52\*[BLACK]	52	52	52	52	52	52	52	52	52	
+_
+Conjunt 5	Bloc 20	\*[RED]5\*[BLACK]	5	5	5	5	5	5	5	5	5	
+\^	Bloc 21	\*[RED]21\*[BLACK]	21	21	21	21	21	21	21	21	21	
+\^	Bloc 22	\*[RED]37\*[BLACK]	37	37	37	37	37	37	37	37	37	
+\^	Bloc 23	\*[RED]53\*[BLACK]	53	53	53	53	53	53	53	53	53	
+_
+Conjunt 6	Bloc 24	\*[RED]6\*[BLACK]	6	6	6	6	6	6	6	6	6	
+\^	Bloc 25	\*[RED]22\*[BLACK]	22	22	22	22	22	22	22	22	22	
+\^	Bloc 26	\*[RED]38\*[BLACK]	38	38	38	38	38	38	38	38	38	
+\^	Bloc 27	\*[RED]54\*[BLACK]	54	54	54	54	54	54	54	54	54	
+_
+Conjunt 7	Bloc 28	\*[RED]7\*[BLACK]	7	7	7	7	7	7	7	7	7	
+\^	Bloc 29	\*[RED]23\*[BLACK]	23	23	23	23	23	23	23	23	23	
+\^	Bloc 30	\*[RED]39\*[BLACK]	39	39	39	39	39	39	39	39	39	
+\^	Bloc 31	\*[RED]55\*[BLACK]	55	55	55	55	55	55	55	55	55	
+_
+Conjunt 8	Bloc 32	\*[RED]8\*[BLACK]	8	8	8	8	8	8	8	8	8	
+\^	Bloc 33	\*[RED]24\*[BLACK]	24	24	24	24	24	24	24	24	24	
+\^	Bloc 34	\*[RED]40\*[BLACK]	40	40	40	40	40	40	40	40	40	
+\^	Bloc 35	\*[RED]56\*[BLACK]	56	56	56	56	56	56	56	56	56	
+_
+Conjunt 9	Bloc 36	\*[RED]9\*[BLACK]	9	9	9	9	9	9	9	9	9	
+\^	Bloc 37	\*[RED]25\*[BLACK]	25	25	25	25	25	25	25	25	25	
+\^	Bloc 38	\*[RED]41\*[BLACK]	41	41	41	41	41	41	41	41	41	
+\^	Bloc 39	\*[RED]57\*[BLACK]	57	57	57	57	57	57	57	57	57	
+_
+Conjunt 10	Bloc 40	\*[RED]10\*[BLACK]	10	10	10	10	10	10	10	10	10	
+\^	Bloc 41	\*[RED]26\*[BLACK]	26	26	26	26	26	26	26	26	26	
+\^	Bloc 42	\*[RED]42\*[BLACK]	42	42	42	42	42	42	42	42	42	
+\^	Bloc 43	\*[RED]58\*[BLACK]	58	58	58	58	58	58	58	58	58	
+_
+Conjunt 11	Bloc 44	\*[RED]11\*[BLACK]	11	11	11	11	11	11	11	11	11	
+\^	Bloc 45	\*[RED]27\*[BLACK]	27	27	27	27	27	27	27	27	27	
+\^	Bloc 46	\*[RED]43\*[BLACK]	43	43	43	43	43	43	43	43	43	
+\^	Bloc 47	\*[RED]59\*[BLACK]	59	59	59	59	59	59	59	59	59	
+_
+Conjunt 12	Bloc 48	\*[RED]12\*[BLACK]	12	12	12	12	12	12	12	12	12	
+\^	Bloc 49	\*[RED]28\*[BLACK]	28	28	28	28	28	28	28	28	28	
+\^	Bloc 50	\*[RED]44\*[BLACK]	44	44	44	44	44	44	44	44	44	
+\^	Bloc 51	\*[RED]60\*[BLACK]	60	60	60	60	60	60	60	60	60	
+_
+Conjunt 13	Bloc 52	\*[RED]13\*[BLACK]	13	13	13	13	13	13	13	13	13	
+\^	Bloc 53	\*[RED]29\*[BLACK]	29	29	29	29	29	29	29	29	29	
+\^	Bloc 54	\*[RED]45\*[BLACK]	45	45	45	45	45	45	45	45	45	
+\^	Bloc 55	\*[RED]61\*[BLACK]	61	61	61	61	61	61	61	61	61	
+_
+Conjunt 14	Bloc 56	\*[RED]14\*[BLACK]	14	14	14	14	14	14	14	14	14	
+\^	Bloc 57	\*[RED]30\*[BLACK]	30	30	30	30	30	30	30	30	30	
+\^	Bloc 58	\*[RED]46\*[BLACK]	46	46	46	46	46	46	46	46	46	
+\^	Bloc 59	\*[RED]62\*[BLACK]	62	62	62	62	62	62	62	62	62	
+_
+Conjunt 15	Bloc 60	\*[RED]15\*[BLACK]	15	15	15	15	15	15	15	15	15	
+\^	Bloc 61	\*[RED]31\*[BLACK]	31	31	31	31	31	31	31	31	31	
+\^	Bloc 62	\*[RED]47\*[BLACK]	47	47	47	47	47	47	47	47	47	
+\^	Bloc 63	\*[RED]63\*[BLACK]	63	63	63	63	63	63	63	63	63	
+_
+.TE
+
+.NH
+Benefici
+.IP
+Mem\*`oria principal
+.EQ
+t sub MP = 4352 cdot 10 cdot 10 = 435200 cdot T sub c
+.EN
+.IP
+Cach\*`e ideal, plena
+.EQ
+t sub ipC = 4352 cdot 10 cdot 10 = 43520 cdot T sub c
+.EN
+.LP
+Benefici $= t sub MP over t sub ipC = 435200 over 43520 = 10$
+.IP
+Cach\*`e ideal, buida
+.EQ
+t sub ibC = 4352 cdot 10 + 4352 cdot 9 = 82688 cdot T sub c
+.EN
+.LP
+Benefici $= t sub MP over t sub ibC = 435200 over 82688 approx 5.26$
+.IP
+Cach\*`e que em calculat
+.EQ
+t sub 1cicle = 68 cdot 64 cdot 10 = 43520
+.EN
+El primer cicle est\*`a completament calculat.
+
+.LP
+Els cops que em de buscar a mem\*`oria principal pel conjunt 1:
+.TS
+center doublebox;
+n n n n n n n n n n.
+1	2	3	4	5	6	7	8	9	10
+0	1	1	1	2	1	1	1	2	1
+.TE
+.LP
+Ho podem dir, ja que a partir de la taula dedu\*:im que a partir del 5 estem a la mateixa cituacio que l'estat l\*`\*'ogic del 1.
+.EQ
+t sub MP sub diff1 = 4 cdot 64 cdot 11 cdot 10 = 28160
+.EN
+Els cops que tenim acc\*'es a mem\*`oria a cach\*'e:
+.TS
+center doublebox;
+n n n n n n n n n n.
+1	2	3	4	5	6	7	8	9	10
+0	64	64	64	60	64	64	64	60	64
+.TE
+Temps total dedicat a buscar en la catch\*'e:
+.EQ
+t sub nomesC = (7 cdot 64 + 2 cdot 60) cdot 64 = 36352
+.EN
+Ara ja si, temps total amb la nostra catch\*'e:
+.EQ
+t sub C = 43520 + 28160 + 36352 = 108032
+.EN
+Comprovaci\*'o del resultat:
+.EQ
+{435200 - 43520 - 28160} over 10 = (7 cdot 64 + 2 cdot 60) cdot 64
+.EN
+.EQ
+43520 + 28160 + 363520 = 435200
+.EN
+Aparentment el resultat \*'es correcte.
+
+.LP
+Benefici $= t sub MP over t sub C = 435200 over 108032 approx 4.03$
